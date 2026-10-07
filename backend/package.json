@@ -1,0 +1,25 @@
+{
+  "name": "Angz",
+  "version": "1.0.0",
+  "description": "Smart Arabic/English task manager. Proprietary - (c) 2026 Hassan Saed Mohamed. No licence granted.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Hassan Saed Mohamed",
+  "license": "LicenseRef-Proprietary",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "google-auth-library": "^11.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.4.0",
+    "mysql2": "^3.24.5",
+    "nodemailer": "^10.0.15"
+  },
+  "private": true
+}

@@ -1,0 +1,69 @@
+Angz (أنجز)
+Copyright (c) 2026 Hassan Saed Mohamed. All Rights Reserved.
+
+=============================================================================
+NOTICE: NO LICENCE HAS BEEN GRANTED
+=============================================================================
+
+This project is proprietary and confidential. No open-source licence has been
+granted for it, and none of the common licences (MIT, Apache-2.0, GPL, BSD,
+or any other) apply to it.
+
+Copyright in this work is protected by international copyright law and the
+ Berne Convention. In the absence of an express licence, all rights are
+ reserved by default: nobody may copy, reproduce, publish, modify, create
+ derivative works from, distribute, sublicense, sell, or otherwise exploit this
+ software, in whole or in part, without the prior written permission of the
+ copyright holder.
+
+----------------------------------------------------------------------------
+WHAT IS ALLOWED WITHOUT PERMISSION
+----------------------------------------------------------------------------
+  * Viewing the source code.
+  * Running the application locally for personal evaluation.
+  * Reporting issues or suggesting improvements.
+
+----------------------------------------------------------------------------
+WHAT IS NOT ALLOWED WITHOUT WRITTEN PERMISSION
+----------------------------------------------------------------------------
+  * Copying, pasting, or re-uploading any part of the code, in any language.
+  * Publishing, forking, mirroring, or redistributing the repository or any
+    file within it.
+  * Creating and distributing derivative or "cleaned-up" versions, including
+    modified variable or file names, translated comments, or reformatting.
+  * Using the code, in whole or in part, in any commercial or academic work,
+    whether or not it is attributed.
+  * Removing, altering, or obscuring the copyright notice from any file.
+  * Claiming authorship, co-authorship, or ownership of this work.
+  * Presenting screenshots, UI designs, or the product concept as your own.
+
+----------------------------------------------------------------------------
+ENFORCEMENT
+----------------------------------------------------------------------------
+  Attribution is not a substitute for permission. Removing or renaming a
+  copyright header does not make a copy lawful, and incorporating substantial
+  portions of this code into another work is infringement regardless of
+  whether the source is publicly visible.
+
+  The copyright holder reserves the right to pursue civil and criminal
+  remedies, including injunctions, statutory damages, and takedown of any
+  unauthorised copy, in any competent jurisdiction.
+
+----------------------------------------------------------------------------
+THIRD-PARTY COMPONENTS
+----------------------------------------------------------------------------
+  This project depends on third-party packages that remain under their own
+  licences (for example Angular under the MIT licence, and the Cairo typeface
+  under the SIL Open Font License 1.1). Those licences apply solely to those
+  packages and are unaffected by this notice.
+
+----------------------------------------------------------------------------
+PERMISSION
+----------------------------------------------------------------------------
+  To obtain permission, contact the copyright holder. Written authorisation
+  must be granted before any use beyond the allowances listed above.
+
+=============================================================================
+SPDX-License-Identifier: LicenseRef-Proprietary
+(An SPDX identifier indicating a proprietary licence with no grant of reuse.)
+=============================================================================
