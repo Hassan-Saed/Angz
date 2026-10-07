@@ -1,0 +1,182 @@
+<!--
+  Copyright (c) 2026 Hassan Saed Mohamed. All Rights Reserved.
+  SPDX-License-Identifier: LicenseRef-Proprietary
+  No licence is granted. See LICENSE for permitted and prohibited uses.
+-->
+<section class="space-y-6 p-4 sm:p-6 max-w-7xl mx-auto min-h-[calc(100dvh-3.5rem)]">
+
+  <header class="card p-6 bg-gradient-to-r from-forest-600 via-forest-700 to-earth-800 text-white border-none shadow-lg relative overflow-hidden animate-fade-in-down">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute -top-10 -end-10 h-40 w-40 rounded-full bg-white/20 animate-float"></div>
+      <div class="absolute -bottom-10 -start-10 h-32 w-32 rounded-full bg-white/10 animate-float" style="animation-delay: 1s;"></div>
+    </div>
+    <div class="relative z-10 space-y-2">
+      <div class="flex items-center justify-between">
+        <span class="rounded-full bg-white/20 backdrop-blur px-3 py-1 text-xs font-semibold">
+          {{ todayLabel() }}
+        </span>
+        <span class="text-xs text-white/80">{{ i18n.t('TodaysPlan') }}</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight min-h-[2.75rem]">
+        <app-typewriter [text]="greeting()" [speed]="55" />
+      </h1>
+      <p class="text-xs sm:text-sm text-forest-100 max-w-xl min-h-[2.5rem]">
+        <app-typewriter [text]="briefLine()" [speed]="18" [delay]="900" />
+      </p>
+    </div>
+  </header>
+
+  <div class="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+
+    <div class="card p-4 sm:p-5 flex flex-col justify-between space-y-2 hover:shadow-md transition-all duration-300 hover:-translate-y-1 animate-fade-in-up stagger-1">
+      <div class="flex items-center justify-between">
+        <span class="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400">{{ i18n.t('UrgentTasks') }}</span>
+        <span class="h-8 w-8 rounded-xl bg-red-100 dark:bg-red-950/60 text-red-600 flex items-center justify-center">
+          <app-icon name="urgent" />
+        </span>
+      </div>
+      <p class="text-2xl sm:text-4xl font-extrabold text-red-600 dark:text-red-400">{{ tasks.urgentCount() }}</p>
+      <p class="text-[11px] text-slate-400">{{ i18n.t('UrgentTasks') }}</p>
+    </div>
+
+    <div class="card p-4 sm:p-5 flex flex-col justify-between space-y-2 hover:shadow-md transition-all duration-300 hover:-translate-y-1 animate-fade-in-up stagger-2">
+      <div class="flex items-center justify-between">
+        <span class="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400">{{ i18n.t('CompletedToday') }}</span>
+        <span class="h-8 w-8 rounded-xl bg-forest-100 dark:bg-forest-950/60 text-forest-600 flex items-center justify-center">
+          <app-icon name="check" />
+        </span>
+      </div>
+      <p class="text-2xl sm:text-4xl font-extrabold text-forest-600 dark:text-forest-400">{{ tasks.completedToday() }}</p>
+      <p class="text-[11px] text-slate-400">{{ i18n.t('CompletedToday') }}</p>
+    </div>
+
+    <div class="card p-4 sm:p-5 flex flex-col justify-between space-y-2 hover:shadow-md transition-all duration-300 hover:-translate-y-1 animate-fade-in-up stagger-3">
+      <div class="flex items-center justify-between">
+        <span class="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400">{{ i18n.t('PendingTasks') }}</span>
+        <span class="h-8 w-8 rounded-xl bg-earth-100 dark:bg-earth-950/60 text-earth-600 flex items-center justify-center">
+          <app-icon name="tasks" />
+        </span>
+      </div>
+      <p class="text-2xl sm:text-4xl font-extrabold text-earth-600 dark:text-earth-400">{{ tasks.pendingCount() }}</p>
+      <p class="text-[11px] text-slate-400">{{ i18n.t('PendingTasks') }}</p>
+    </div>
+
+    <div class="card p-4 sm:p-5 flex flex-col justify-between space-y-2 hover:shadow-md transition-all duration-300 hover:-translate-y-1 animate-fade-in-up stagger-4">
+      <div class="flex items-center justify-between">
+        <span class="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400">{{ i18n.t('CompletionRate') }}</span>
+        <span class="h-8 w-8 rounded-xl bg-forest-100 dark:bg-forest-950/60 text-forest-600 flex items-center justify-center">
+          <app-icon name="chart" />
+        </span>
+      </div>
+      <p class="text-2xl sm:text-4xl font-extrabold text-forest-600 dark:text-forest-400">{{ tasks.completionRatio() }}%</p>
+      <p class="text-[11px] text-slate-400">{{ i18n.t('CompletionRate') }}</p>
+    </div>
+
+  </div>
+
+  <div class="card p-5 space-y-3 animate-fade-in-up stagger-5">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">{{ i18n.t('ProgressLabel', { done: tasks.completedToday(), total: tasks.pendingCount() + tasks.completedToday() }) }}</h2>
+        <p class="text-xs text-slate-500">{{ i18n.t('TodaysPlan') }}</p>
+      </div>
+      <a routerLink="/analytics" class="text-xs font-bold text-forest-600 dark:text-forest-400 hover:underline">
+        {{ i18n.t('ViewAnalytics') }}
+      </a>
+    </div>
+
+    <div class="h-3 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+      <div class="h-full rounded-full bg-gradient-to-r from-forest-500 to-forest-600 transition-all duration-700 ease-out" [style.width.%]="tasks.completionRatio()"></div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+    <div class="card p-5 border-s-4 border-s-forest-500 space-y-3 flex flex-col justify-between animate-fade-in-up stagger-5">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <span class="h-8 w-8 rounded-xl bg-forest-100 dark:bg-forest-950/60 text-forest-600 flex items-center justify-center">
+            <app-icon name="sparkle" />
+          </span>
+          <h3 class="font-bold text-slate-900 dark:text-white">{{ i18n.t('AiAgent') }}</h3>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          {{ i18n.t('AiSubtitle') }}
+        </p>
+      </div>
+
+      <div class="pt-2">
+        <a
+          routerLink="/ai-agent"
+          class="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-forest-600 hover:bg-forest-700 px-4 py-2.5 text-xs font-bold text-white transition-all duration-200 hover:shadow-lg"
+        >
+          {{ i18n.t('AiAgent') }}
+        </a>
+      </div>
+    </div>
+
+    <div class="card p-5 border-s-4 border-s-earth-500 space-y-3 flex flex-col justify-between animate-fade-in-up stagger-6">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <span class="h-8 w-8 rounded-xl bg-earth-100 dark:bg-earth-950/60 text-earth-600 flex items-center justify-center">
+            <app-icon name="tasks" />
+          </span>
+          <h3 class="font-bold text-slate-900 dark:text-white">{{ i18n.t('ManageTasks') }}</h3>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          {{ i18n.t('TasksSubtitle') }}
+        </p>
+      </div>
+
+      <div class="pt-2">
+        <a
+          routerLink="/tasks"
+          class="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-earth-600 hover:bg-earth-700 px-4 py-2.5 text-xs font-bold text-white transition-all duration-200 hover:shadow-lg"
+        >
+          {{ i18n.t('ManageTasks') }}
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card p-5 space-y-4 animate-fade-in-up stagger-6">
+    <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+      <h2 class="font-bold text-slate-900 dark:text-white text-base">{{ i18n.t('ManageTasks') }}</h2>
+      <a routerLink="/tasks" class="text-xs font-bold text-forest-600 dark:text-forest-400 hover:underline">{{ i18n.t('ViewAll') }}</a>
+    </div>
+
+    <div class="space-y-2">
+      @for (task of recentTasks(); track task.id) {
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-100 dark:border-slate-800 transition-all duration-200 hover:shadow-sm">
+          <div class="flex items-center gap-3">
+            <span [class]="task.status === 'done' ? 'text-forest-500' : 'text-slate-400'">
+              <app-icon [name]="task.status === 'done' ? 'check' : 'circle'" />
+            </span>
+            <div>
+              <p [class.line-through]="task.status === 'done'" class="text-sm font-bold text-slate-800 dark:text-slate-200">
+                {{ task.title }}
+              </p>
+              @if (task.dueDate) {
+                <span class="text-[11px] text-slate-400">{{ task.dueDate }}</span>
+              }
+            </div>
+          </div>
+
+          <span class="text-xs font-bold px-2 py-0.5 rounded-md"
+            [class]="{
+              'bg-red-100 dark:bg-red-950/60 text-red-600': task.priority === 'urgent',
+              'bg-orange-100 dark:bg-orange-950/60 text-orange-600': task.priority === 'high',
+              'bg-blue-100 dark:bg-blue-950/60 text-blue-600': task.priority === 'medium',
+              'bg-slate-100 dark:bg-slate-800 text-slate-600': task.priority === 'low'
+            }">
+            {{ task.priority === 'urgent' ? i18n.t('PriorityUrgent') : task.priority === 'high' ? i18n.t('PriorityHigh') : task.priority === 'medium' ? i18n.t('PriorityMedium') : i18n.t('PriorityLow') }}
+          </span>
+        </div>
+      } @empty {
+        <p class="text-xs text-slate-400 text-center py-4">{{ i18n.t('EmptyTasks') }}</p>
+      }
+    </div>
+  </div>
+
+</section>

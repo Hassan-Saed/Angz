@@ -1,0 +1,51 @@
+<!--
+  Copyright (c) 2026 Hassan Saed Mohamed. All Rights Reserved.
+  SPDX-License-Identifier: LicenseRef-Proprietary
+  No licence is granted. See LICENSE for permitted and prohibited uses.
+-->
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Angz — Organize Your Tasks Intelligently</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Angz — Smart task management app with AI assistant in Arabic and English." />
+    <meta name="theme-color" content="#059669" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon-180.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+
+    <link rel="preload" href="/assets/fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/inter-latin-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/cairo-arabic-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/cairo-arabic-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('angz.theme');
+          var dark =
+            stored === 'dark' ||
+            ((stored === 'system' || !stored) &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (e) {
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root>
+      <div class="grid min-h-dvh place-items-center bg-slate-50 dark:bg-slate-950">
+        <div class="text-center space-y-3 animate-fade-in">
+          <img src="/assets/icons/icon-192.png" alt="Angz" class="h-16 w-16 mx-auto rounded-2xl shadow-lg animate-bounce-in" />
+          <p class="text-sm text-slate-500 dark:text-slate-400 animate-pulse-soft">Loading…</p>
+        </div>
+      </div>
+    </app-root>
+  </body>
+</html>

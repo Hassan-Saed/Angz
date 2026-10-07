@@ -1,0 +1,103 @@
+<!--
+  Copyright (c) 2026 Hassan Saed Mohamed. All Rights Reserved.
+  SPDX-License-Identifier: LicenseRef-Proprietary
+  No licence is granted. See LICENSE for permitted and prohibited uses.
+-->
+<section class="space-y-6 p-4 sm:p-6 max-w-4xl mx-auto min-h-[calc(100dvh-3.5rem)]">
+  <header class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 animate-fade-in-down">
+    <div>
+      <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white"><app-typewriter [text]="i18n.t('Settings')" [speed]="45" /></h1>
+      <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">{{ i18n.t('SettingsSubtitle') }}</p>
+    </div>
+    @if (saveSuccess()) {
+      <span class="rounded-full bg-forest-100 dark:bg-forest-950/80 px-3 py-1 text-xs font-bold text-forest-700 dark:text-forest-300 animate-bounce-in">
+        {{ i18n.t('Saved') }}</span>
+    }
+  </header>
+
+  <div class="card p-5 space-y-3 animate-fade-in-up stagger-1 hover:shadow-md transition-all duration-300">
+    <h2 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+      <app-icon name="sun" />
+      {{ i18n.t('Appearance') }}
+    </h2>
+    <div class="grid grid-cols-3 gap-2">
+      @for (option of themeOptions; track option.value) {
+        <button
+          type="button"
+          (click)="setTheme(option.value)"
+          [class.bg-forest-600]="theme.preference() === option.value"
+          [class.text-white]="theme.preference() === option.value"
+          [class.bg-slate-50]="theme.preference() !== option.value"
+          [class.dark:bg-slate-800]="theme.preference() !== option.value"
+          class="rounded-xl border border-slate-200 dark:border-slate-700 px-4 py-2.5 text-xs font-bold transition-all duration-200 text-center hover:shadow-sm"
+        >
+          {{ i18n.t(option.labelKey) }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="card p-5 space-y-4 animate-fade-in-up stagger-2 hover:shadow-md transition-all duration-300">
+    <h2 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+      <app-icon name="bell" />
+      {{ i18n.t('NotificationsTitle') }}
+    </h2>
+
+    <label class="flex items-center justify-between cursor-pointer">
+      <div>
+        <p class="text-sm font-bold text-slate-800 dark:text-slate-200">{{ i18n.t('PushNotifications') }}{{ i18n.t('NotificationsTitle') }}</p>
+        <p class="text-xs text-slate-400">{{ i18n.t('PushNotificationsHint') }}</p>
+      </div>
+      <input
+        type="checkbox"
+        [checked]="auth.user()?.settings?.pushEnabled"
+        (change)="togglePush($any($event.target).checked)"
+        class="h-5 w-5 rounded border-slate-300 text-forest-600 focus:ring-forest-500"
+      />
+    </label>
+
+    <div class="h-px bg-slate-100 dark:bg-slate-800"></div>
+
+    <label class="flex items-center justify-between cursor-pointer">
+      <div>
+        <p class="text-sm font-bold text-slate-800 dark:text-slate-200">{{ i18n.t('DailySummary') }}</p>
+        <p class="text-xs text-slate-400">{{ i18n.t('DailySummaryHint') }}</p>
+      </div>
+      <input
+        type="checkbox"
+        [checked]="auth.user()?.settings?.dailySummaryEnabled"
+        (change)="toggleDailySummary($any($event.target).checked)"
+        class="h-5 w-5 rounded border-slate-300 text-forest-600 focus:ring-forest-500"
+      />
+    </label>
+  </div>
+
+  <div class="card p-5 space-y-3 animate-fade-in-up stagger-3 hover:shadow-md transition-all duration-300">
+    <h2 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+      <app-icon name="sparkle" />
+      {{ i18n.t('PersonaSection') }}
+    </h2>
+    <p class="text-xs text-slate-500 dark:text-slate-400">{{ i18n.t('PersonaSectionHint') }}</p>
+
+    <div class="space-y-2 pt-2">
+      @for (p of aiPersonas(); track p.id) {
+        <label
+          (click)="setPersona(p.id)"
+          [class.border-forest-500]="auth.user()?.settings?.aiPersona === p.id"
+          [class.bg-forest-50/50]="auth.user()?.settings?.aiPersona === p.id"
+          [class.dark:bg-forest-950/40]="auth.user()?.settings?.aiPersona === p.id"
+          class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 cursor-pointer transition-all duration-200 hover:border-forest-400"
+        >
+          <div>
+            <p class="text-sm font-bold text-slate-900 dark:text-white">{{ p.name }}</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">{{ p.desc }}</p>
+          </div>
+          <span [class.text-forest-600]="auth.user()?.settings?.aiPersona === p.id" class="text-lg">
+            {{ auth.user()?.settings?.aiPersona === p.id ? '●' : '○' }}
+          </span>
+        </label>
+      }
+    </div>
+  </div>
+
+</section>

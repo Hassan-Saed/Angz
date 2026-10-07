@@ -1,0 +1,114 @@
+<!--
+  Copyright (c) 2026 Hassan Saed Mohamed. All Rights Reserved.
+  SPDX-License-Identifier: LicenseRef-Proprietary
+  No licence is granted. See LICENSE for permitted and prohibited uses.
+-->
+<main class="grid min-h-dvh place-items-center bg-slate-50 dark:bg-slate-950 px-4 py-8">
+  <section class="w-full max-w-md rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-lg transition-all animate-scale-in">
+
+    <div class="mb-6 flex flex-col items-center text-center">
+      <img src="/assets/icons/icon-192.png" alt="Angz" class="h-16 w-16 rounded-2xl shadow-sm animate-bounce-in" />
+      <h1 class="mt-4 text-2xl font-extrabold text-slate-900 dark:text-white">
+        {{ i18n.t(mode() === 'login' ? 'SignInTitle' : 'SignUpTitle') }}
+      </h1>
+      <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+        {{ i18n.t(mode() === 'login' ? 'SignInSubtitle' : 'SignUpSubtitle') }}
+      </p>
+    </div>
+
+    @if (errorMsg()) {
+      <div class="mb-4 rounded-xl bg-red-50 dark:bg-red-950/50 p-3 text-sm text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900 text-center animate-fade-in-down">
+        {{ errorMsg() }}
+      </div>
+    }
+
+    <form (ngSubmit)="onSubmit()" class="space-y-4">
+      @if (mode() === 'register') {
+        <div class="animate-fade-in-up">
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{{ i18n.t('FullName') }}</label>
+          <input
+            type="text"
+            [(ngModel)]="name"
+            name="name"
+            placeholder="{{ i18n.t('FullNamePlaceholder') }}"
+            required
+            class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white focus:border-forest-500 focus:outline-none transition-all duration-200"
+          />
+        </div>
+      }
+
+      <div class="animate-fade-in-up stagger-1">
+        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{{ i18n.t('EmailAddress') }}</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="{{ i18n.t('EmailPlaceholder') }}"
+          required
+          class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white focus:border-forest-500 focus:outline-none transition-all duration-200"
+        />
+      </div>
+
+      <div class="animate-fade-in-up stagger-2">
+        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">{{ i18n.t('Password') }}</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="••••••••"
+          required
+          class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white focus:border-forest-500 focus:outline-none transition-all duration-200"
+        />
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loading()"
+        class="flex w-full items-center justify-center gap-2 rounded-xl bg-forest-600 px-4 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-forest-700 hover:shadow-lg disabled:opacity-50 animate-fade-in-up stagger-3"
+      >
+        @if (loading()) {
+          <span class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+        }
+        {{ i18n.t(mode() === 'login' ? 'SignIn' : 'SignUp') }}
+      </button>
+    </form>
+
+    <div class="my-5 flex items-center gap-3">
+      <div class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
+      <span class="text-xs text-slate-400">{{ i18n.t('OrVia') }}</span>
+      <div class="h-px flex-1 bg-slate-200 dark:bg-slate-800"></div>
+    </div>
+
+    <div class="space-y-2">
+      <button
+        type="button"
+        (click)="enterDemo()"
+        class="flex w-full items-center justify-center gap-2 rounded-xl border border-forest-200 dark:border-forest-900 bg-forest-50 dark:bg-forest-950/40 px-4 py-2.5 text-sm font-semibold text-forest-700 dark:text-forest-300 hover:bg-forest-100 dark:hover:bg-forest-900/60 transition-all duration-200 animate-fade-in-up stagger-4"
+      >
+        {{ i18n.t('TryDemoMode') }}
+      </button>
+
+      <button
+        type="button"
+        (click)="loginWithGoogle()"
+        class="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all duration-200 animate-fade-in-up stagger-5"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true">
+          <path d="M21.35 11.1H12v2.9h5.35c-.23 1.47-1.73 4.3-5.35 4.3a5.95 5.95 0 1 1 0-11.9c1.87 0 3.12.8 3.84 1.48l2.62-2.53C16.9 3.95 14.76 3 12 3A9 9 0 1 0 21 12c0-.3-.02-.6-.05-.9z" />
+        </svg>
+        <span>{{ i18n.t('ContinueWithGoogle') }}</span>
+      </button>
+    </div>
+
+    <div class="mt-6 text-center text-xs text-slate-500 dark:text-slate-400">
+      @if (mode() === 'login') {
+        <span>{{ i18n.t('NoAccountYet') }}</span>
+        <button type="button" (click)="toggleMode()" class="font-bold text-forest-600 dark:text-forest-400 hover:underline">{{ i18n.t('SignUp') }}</button>
+      } @else {
+        <span>{{ i18n.t('AlreadyHaveAccount') }}</span>
+        <button type="button" (click)="toggleMode()" class="font-bold text-forest-600 dark:text-forest-400 hover:underline">{{ i18n.t('SignIn') }}</button>
+      }
+    </div>
+
+  </section>
+</main>
